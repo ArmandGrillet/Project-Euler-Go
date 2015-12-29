@@ -7,9 +7,7 @@ import (
 	"math/big"
 )
 
-const (
-	max = 2000000
-)
+const max = 2000000
 
 func sumPrimes(start int, end int, ch chan<- int) {
 	sum := 0
