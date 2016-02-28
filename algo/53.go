@@ -8,25 +8,13 @@ In combinatorics, we use the notation, 5C3 = 10.
 How many, not necessarily distinct, values of  nCr, for 1 ≤ n ≤ 100, are greater than one-million?
 */
 
-package main
+package algo
 
 import (
 	"fmt"
 )
 
-func factorial(x int) int {
-	if x == 0 {
-		return 1
-	} else {
-		return x * factorial(x-1)
-	}
-}
-
-func combinator(n, r int) int {
-	return factorial(n) / (factorial(r) * factorial(n-r))
-}
-
-func main() {
+func E53() {
 	greaterThanOneMillion := 0
 	for n := 23; n <= 100; n++ {
 		for r := 1; r <= n; r++ {
@@ -38,4 +26,8 @@ func main() {
 		}
 	}
 	fmt.Println(greaterThanOneMillion)
+}
+
+func combinator(n, r int) int {
+	return Factorial(n) / (Factorial(r) * Factorial(n-r))
 }
