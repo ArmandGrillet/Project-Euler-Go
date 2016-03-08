@@ -5,6 +5,15 @@ There are exactly ten ways of selecting three from five, 12345:
 
 In combinatorics, we use the notation, 5C3 = 10.
 
+In general,
+
+nCr =
+n!
+_______
+r!(n−r)!
+,where r ≤ n, n! = n×(n−1)×...×3×2×1, and 0! = 1.
+It is not until n = 23, that a value exceeds one-million: 23C10 = 1144066.
+
 How many, not necessarily distinct, values of  nCr, for 1 ≤ n ≤ 100, are greater than one-million?
 */
 
@@ -12,22 +21,20 @@ package algo
 
 import (
 	"fmt"
+	"math/big"
 )
 
 func E53() {
-	greaterThanOneMillion := 0
-	for n := 23; n <= 100; n++ {
-		for r := 1; r <= n; r++ {
-			fmt.Printf("%d %d\n", n, r)
-			if combinator(n, r) > 1000000 {
-				greaterThanOneMillion += (n - r) + 1
-				r = n
+	max := int64(1000000)
+	greaterThanMax := 0
+
+	for n := 1; n <= 100; n++ {
+		for r := 0; r <= n; r++ {
+			coef := big.NewInt(int64(0)).Binomial(int64(n), int64(r))
+			if coef.Cmp(big.NewInt(max)) >= 0 {
+				greaterThanMax++
 			}
 		}
 	}
-	fmt.Println(greaterThanOneMillion)
-}
-
-func combinator(n, r int) int {
-	return Factorial(n) / (Factorial(r) * Factorial(n-r))
+	fmt.Println(greaterThanMax)
 }

@@ -12,14 +12,14 @@ func E1() {
 	max := 1000
 	multiples := [...]int{3, 5}
 
-	multiplesFound := []int{}
+	multiplesUsed := []int{}
 	sums := make(chan int, len(multiples))
 	sum := 0
 
 	for _, multiple := range multiples {
-		go multiplesSum(multiple, max, multiplesFound, sums)
+		go multiplesSum(multiple, max, multiplesUsed, sums)
 		sum += <-sums
-		multiplesFound = append(multiplesFound, multiple)
+		multiplesUsed = append(multiplesUsed, multiple)
 	}
 
 	fmt.Println(sum)
