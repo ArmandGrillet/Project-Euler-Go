@@ -1,13 +1,12 @@
 package algo
 
-import "math"
+import (
+	"math"
+	"math/big"
+)
 
-func Reverse(s string) string {
-	r := []rune(s)
-	for i, j := 0, len(r)-1; i < len(r)/2; i, j = i+1, j-1 {
-		r[i], r[j] = r[j], r[i]
-	}
-	return string(r)
+func BigFromInt(x int) *big.Int {
+	return big.NewInt(int64(x))
 }
 
 func Contains(s []int, e int) bool {
@@ -19,26 +18,13 @@ func Contains(s []int, e int) bool {
 	return false
 }
 
-func Triangle(n int) int {
-	return ((n * (n + 1)) / 2)
-}
-
-func Pentagonal(n int) int {
-	return ((n * (3*n - 1)) / 2)
-}
-
-func IsPandigital(number int) bool {
-	digits := digits(number)
-	if len(digits) == 9 {
-		for i := 1; i < 10; i++ {
-			if !Contains(digits, i) {
-				return false
-			}
-		}
-		return true
-	} else {
-		return false
+func Digits(number int) []int {
+	digits := []int{}
+	for number > 0 {
+		digits = append(digits, number%10)
+		number = number / 10
 	}
+	return digits
 }
 
 func EqualSlices(a, b []int) bool {
@@ -59,13 +45,18 @@ func Factorial(x int) int {
 	}
 }
 
-func Digits(number int) []int {
-	digits := []int{}
-	for number > 0 {
-		digits = append(digits, number%10)
-		number = number / 10
+func IsPandigital(number int) bool {
+	digits := digits(number)
+	if len(digits) == 9 {
+		for i := 1; i < 10; i++ {
+			if !Contains(digits, i) {
+				return false
+			}
+		}
+		return true
+	} else {
+		return false
 	}
-	return digits
 }
 
 func Join(i, j int) int {
@@ -75,4 +66,20 @@ func Join(i, j int) int {
 		tempJ = tempJ / 10
 	}
 	return i*int(math.Pow10(e)) + j
+}
+
+func Pentagonal(n int) int {
+	return ((n * (3*n - 1)) / 2)
+}
+
+func Reverse(s string) string {
+	r := []rune(s)
+	for i, j := 0, len(r)-1; i < len(r)/2; i, j = i+1, j-1 {
+		r[i], r[j] = r[j], r[i]
+	}
+	return string(r)
+}
+
+func Triangle(n int) int {
+	return ((n * (n + 1)) / 2)
 }

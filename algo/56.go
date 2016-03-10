@@ -13,14 +13,14 @@ import (
 )
 
 func E56() {
-	max := bigFromInt(100)
+	max := BigFromInt(100)
 
-	one := bigFromInt(1) // Used to increment a and b
+	one := BigFromInt(1) // Used to increment a and b
 	maxSum := 0
-	exp := bigFromInt(0) // Value of a ** b
+	exp := BigFromInt(0) // Value of a ** b
 
-	for a := bigFromInt(0); a.Cmp(max) == -1; a.Add(a, one) {
-		for b := bigFromInt(0); b.Cmp(max) == -1; b.Add(b, one) {
+	for a := BigFromInt(0); a.Cmp(max) == -1; a.Add(a, one) {
+		for b := BigFromInt(0); b.Cmp(max) == -1; b.Add(b, one) {
 			exp.Exp(a, b, nil)
 			if digitalSum(exp) > maxSum {
 				maxSum = digitalSum(exp)
@@ -29,10 +29,6 @@ func E56() {
 	}
 
 	fmt.Println(maxSum)
-}
-
-func bigFromInt(x int) *big.Int {
-	return big.NewInt(int64(x))
 }
 
 func digitalSum(x *big.Int) int {
