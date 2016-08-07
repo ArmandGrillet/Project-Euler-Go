@@ -8,9 +8,11 @@ import (
 )
 
 func E48() {
+	max := 1000
+
 	sum, power := big.NewInt(0), big.NewInt(0)
 	bigI := big.NewInt(1)
-	for i := 1; i <= 1000; i++ {
+	for i := 1; i <= max; i++ {
 		bigI = big.NewInt(int64(i))
 		power.Exp(bigI, bigI, nil)
 		sum.Add(sum, power)

@@ -22,7 +22,7 @@ import (
 )
 
 func E43() {
-	pandigitals := OneToNinePandigitals([]int{})
+	pandigitals := oneToNinePandigitals([]int{})
 	pandigitals = addZeroToPermutations(pandigitals)
 	sum := 0
 	for i := 0; i < len(pandigitals); i++ {
@@ -34,7 +34,7 @@ func E43() {
 	fmt.Println(sum)
 }
 
-func OneToNinePandigitals(alreadyUsed []int) []int {
+func oneToNinePandigitals(alreadyUsed []int) []int {
 	digitPermutations := []int{}
 	if len(alreadyUsed) == 8 {
 		for i := 1; i <= 9; i++ {
@@ -45,7 +45,7 @@ func OneToNinePandigitals(alreadyUsed []int) []int {
 	} else {
 		for i := 1; i <= 9; i++ {
 			if !Contains(alreadyUsed, i) {
-				newPermutations := OneToNinePandigitals(append(alreadyUsed, i))
+				newPermutations := oneToNinePandigitals(append(alreadyUsed, i))
 				for j := 0; j < len(newPermutations); j++ {
 					digitPermutations = append(digitPermutations, Join(i, newPermutations[j]))
 				}

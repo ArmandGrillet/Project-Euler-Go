@@ -16,29 +16,25 @@ We can see that 28 is the first triangle number to have over five divisors.
 
 What is the value of the first triangle number to have over five hundred divisors?
 */
+package main
 
-package algo
+import "math"
 
-import (
-	"fmt"
-	"math"
-)
-
-func E12() {
-	numberOfDivisors := 500
-	triangleNumber, naturalNumber := 1, 1
-	for factors(triangleNumber) <= numberOfDivisors {
-		naturalNumber++
-		triangleNumber += naturalNumber
+func main() {
+	const divs = 500
+	triNumber, natNumber := 1, 1
+	for factors(triNumber) < divs {
+		natNumber++
+		triNumber += natNumber
 	}
-	fmt.Println(triangleNumber)
+	println(triNumber)
 }
 
-func factors(number int) (factors int) {
-	for i := 1; i <= int(math.Sqrt(float64(number))); i++ {
-		if number%i == 0 {
+func factors(n int) (factors int) {
+	for i := 1; i <= int(math.Sqrt(float64(n))); i++ {
+		if n%i == 0 {
 			factors++
-			if i != number/i {
+			if i != n/i {
 				factors++
 			}
 		}

@@ -7,8 +7,7 @@ For example, 32 + 42 = 9 + 16 = 25 = 52.
 There exists exactly one Pythagorean triplet for which a + b + c = 1000.
 Find the product abc.
 */
-
-package algo
+package main
 
 import (
 	"fmt"
@@ -16,19 +15,17 @@ import (
 	"os"
 )
 
-func E9() {
-	sum := 1000
-
+func main() {
+	const sum = 1000
 	a := 0
 	var b, c int
-	var tempC float64
-	for a+(a+1)+(a+2) < sum { // Pythagorean triplet.
-		a++
+	var floatC float64
+	for a+(a+1)+(a+2) < sum {
 		b = a + 1
 		for a+b+(b+1) < sum {
-			tempC = math.Sqrt(float64(a*a + b*b))
-			if tempC == float64(int(tempC)) { // The square of c is a natural number.
-				c = int(tempC)
+			floatC = math.Sqrt(float64(a*a + b*b))
+			if floatC == float64(int(floatC)) {
+				c = int(floatC)
 				if a+b+c == 1000 {
 					fmt.Println(a * b * c)
 					os.Exit(0)
@@ -36,5 +33,6 @@ func E9() {
 			}
 			b++
 		}
+		a++
 	}
 }

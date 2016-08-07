@@ -13,33 +13,31 @@ Which starting number, under one million, produces the longest chain?
 
 NOTE: Once the chain starts the terms are allowed to go above one million.
 */
-
-package algo
+package main
 
 import "fmt"
 
-const (
-	max = 1000000
-)
+func main() {
+	const max = 1e6
 
-func E14() {
-	var biggestChainNumber, biggestChainLength, currentChainLength int
+	chain, bestChain, bestChainIndex := 0, 0, 0
 	for i := 1; i < max; i++ {
-		currentChainLength = chainLength(i)
-		if currentChainLength > biggestChainLength {
-			biggestChainLength = currentChainLength
-			biggestChainNumber = i
+		chain = chainLength(i)
+		if chain > bestChain {
+			bestChain = chain
+			bestChainIndex = i
 		}
 	}
-	fmt.Println(biggestChainNumber)
+
+	fmt.Println(bestChainIndex)
 }
 
 func chainLength(number int) int {
 	if number == 1 {
 		return 1
-	} else if number%2 == 0 { // Even
+	} else if number%2 == 0 {
 		return 1 + chainLength(number/2)
-	} else { // Odd
+	} else {
 		return 1 + chainLength(3*number+1)
 	}
 }
